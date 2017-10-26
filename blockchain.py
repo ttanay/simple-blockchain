@@ -56,3 +56,19 @@ class Blockchain(object):
     def last_block(self):
         # reaturn last block in a chain
         pass
+
+    def proof_of_work(self, last_proof):
+        # hash of last_proof and proof shoul start with 4 '0's
+
+        proof = 0
+        while self.valid_proof(last_proof, prof) is False:
+            proof += 1
+        return proof
+
+    @staticmethod
+    def valid_proof(last_proof, proof):
+        # checks if hash('{last_proof}{proof}') starts with '0000'
+
+        guess = '{}{}'.format(last_proof, proof).encode()
+        guess_hash = haslib.sha256(guess).hexdigest()
+        return guess_hash[:4] == "0000"
